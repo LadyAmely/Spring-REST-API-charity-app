@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+
 import java.math.BigDecimal;
 
 @Entity
@@ -31,6 +32,10 @@ public class FundraisingBox {
 
     @Column(nullable = false, length = 3)
     private String currency;
+
+    @Column(nullable = false)
+    private boolean isDeleted = false;
+
 
 }
 

@@ -57,4 +57,27 @@ public class FundraisingBoxController {
         }
     }
 
+    @PostMapping("/{fundraisingBoxId}/assign/{eventId}")
+    public ResponseEntity<String> assignFundraisingBoxToEvent(
+            @PathVariable Long fundraisingBoxId, @PathVariable Long eventId) {
+        try {
+            boxService.assignFundraisingBoxToEvent(fundraisingBoxId, eventId);
+            return new ResponseEntity<>("The gathering point has been assigned to the event.", HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (IllegalStateException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> unregisterFundraisingBox(@PathVariable Long id) {
+        try {
+            boxService.unregisterFundraisingBox(id);
+            return new ResponseEntity<>("The collection point has been deregistered.", HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
 }
