@@ -1,6 +1,6 @@
 package com.donations.donations.logs;
 
-public interface LoggerService {
+public interface ILoggerService {
 
     public void logInfo(String message);
     public void logWarn(String message);

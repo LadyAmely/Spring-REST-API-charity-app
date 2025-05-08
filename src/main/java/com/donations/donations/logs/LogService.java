@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 
 
 @Service
-public class LogService implements LoggerService{
+public class LogService implements ILoggerService {
 
     private static final Logger logger =  LoggerFactory.getLogger(LogService.class);
 

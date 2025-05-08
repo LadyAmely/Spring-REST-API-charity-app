@@ -1,4 +1,4 @@
-package com.donations.donations.service;
+package com.donations.donations.service.fundraisingBox;
 
 import com.donations.donations.model.Event;
 import com.donations.donations.model.FundraisingBox;
@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Service
-public class FundraisingBoxService {
+public class FundraisingBoxService implements IFundraisingBoxService {
     private final FundraisingBoxRepository boxRepository;
     private final EventRepository eventRepository;
 
@@ -21,6 +21,7 @@ public class FundraisingBoxService {
         this.eventRepository = eventRepository;
     }
 
+    @Override
     public FundraisingBox createFundraisingBox(String currency) {
         FundraisingBox newBox = new FundraisingBox();
         newBox.setAmount(BigDecimal.ZERO);
@@ -30,10 +31,12 @@ public class FundraisingBoxService {
         return boxRepository.save(newBox);
     }
 
+    @Override
     public List<FundraisingBox> getAllFundraisingBoxes() {
         return boxRepository.findAll();
     }
 
+    @Override
     public void unregisterFundraisingBox(Long id) {
         FundraisingBox fundraisingBox = boxRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("The collection point has been deregistered."));
@@ -41,6 +44,7 @@ public class FundraisingBoxService {
         boxRepository.save(fundraisingBox);
     }
 
+    @Override
     public void assignFundraisingBoxToEvent(Long fundraisingBoxId, Long eventId) {
         FundraisingBox fundraisingBox = boxRepository.findById(fundraisingBoxId)
                 .orElseThrow(() -> new IllegalArgumentException("Fundraising field does not exist."));
@@ -58,3 +62,4 @@ public class FundraisingBoxService {
 
 
 }
+

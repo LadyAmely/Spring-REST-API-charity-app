@@ -3,7 +3,7 @@ package com.donations.donations.controller;
 import com.donations.donations.dto.FundraisingBoxDTO;
 import com.donations.donations.logs.LogService;
 import com.donations.donations.model.FundraisingBox;
-import com.donations.donations.service.FundraisingBoxService;
+import com.donations.donations.service.fundraisingBox.FundraisingBoxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
