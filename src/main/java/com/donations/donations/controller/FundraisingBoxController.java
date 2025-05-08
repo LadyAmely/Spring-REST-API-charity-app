@@ -1,10 +1,9 @@
 package com.donations.donations.controller;
 
 import com.donations.donations.dto.FundraisingBoxDTO;
+import com.donations.donations.logs.LogService;
 import com.donations.donations.model.FundraisingBox;
 import com.donations.donations.service.FundraisingBoxService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,17 +16,18 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/fundraising-boxes")
 public class FundraisingBoxController {
 
-    private static final Logger logger = LoggerFactory.getLogger(FundraisingBoxController.class);
+    private final LogService logService;
     private final FundraisingBoxService boxService;
 
     @Autowired
-    public FundraisingBoxController(FundraisingBoxService boxService) {
+    public FundraisingBoxController(FundraisingBoxService boxService, LogService logService) {
         this.boxService = boxService;
+        this.logService = logService;
     }
 
     @GetMapping
     public ResponseEntity<List<FundraisingBoxDTO>> getAllFundraisingBoxes() {
-        logger.info("Retrieving all fundraising boxes");
+        logService.logInfo("Retrieving all fundraising boxes");
 
         List<FundraisingBox> boxes = boxService.getAllFundraisingBoxes();
 
@@ -40,10 +40,10 @@ public class FundraisingBoxController {
 
     @PostMapping
     public ResponseEntity<FundraisingBox> createFundraisingBox(@RequestParam String currency) {
-        logger.info("Starting creation of new fundraising field with currency: {}", currency);
+        logService.logInfo("Starting creation of new fundraising field with currency: " + currency);
 
         FundraisingBox newBox = boxService.createFundraisingBox(currency);
-        logger.info("Event created successfully. ID: {}, Currency: {}", newBox.getId(), newBox.getCurrency());
+        logService.logInfo("Event created successfully. ID: " + newBox.getId() + ", Currency: " + newBox.getCurrency());
 
         return new ResponseEntity<>(newBox, HttpStatus.CREATED);
     }
