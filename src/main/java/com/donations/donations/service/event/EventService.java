@@ -5,6 +5,8 @@ import com.donations.donations.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EventService implements IEventService {
 
@@ -21,6 +23,11 @@ public class EventService implements IEventService {
         event.setName(name);
         event.setCurrency(currency);
         return eventRepository.save(event);
+    }
+
+    @Override
+    public List<Event> getAllEvents() {
+        return eventRepository.findAll();
     }
 
 }
