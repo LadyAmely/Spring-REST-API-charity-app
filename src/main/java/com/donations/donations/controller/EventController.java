@@ -26,20 +26,9 @@ public class EventController {
 
     @PostMapping
     public ResponseEntity<Event> createEvent(@RequestBody Event event) {
-        Event createdEvent = null;
-        try {
-            createdEvent = eventService.createEvent(event.getName(), event.getCurrency());
-            logger.info("Event created successfully: {}", createdEvent.getName());
-            return new ResponseEntity<>(createdEvent, HttpStatus.CREATED);
-        } catch (Exception e) {
-            logger.error("Error creating event: {}", e.getMessage(), e);
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        } finally {
-            if (createdEvent == null) {
-                logger.warn("Event not created.");
-            }
-            logger.info("End of attempt to create event.");
-        }
+        Event createdEvent = eventService.createEvent(event.getName(), event.getCurrency());
+        logger.info("Event created successfully: {}", createdEvent.getName());
+        return new ResponseEntity<>(createdEvent, HttpStatus.CREATED);
     }
 
 }

@@ -41,43 +41,24 @@ public class FundraisingBoxController {
     @PostMapping
     public ResponseEntity<FundraisingBox> createFundraisingBox(@RequestParam String currency) {
         logger.info("Starting creation of new fundraising field with currency: {}", currency);
-        FundraisingBox newBox = null;
-        try {
-            newBox = boxService.createFundraisingBox(currency);
-            logger.info("Event created successfully. ID: {}, Currency: {}", newBox.getId(), newBox.getCurrency());
-            return new ResponseEntity<>(newBox, HttpStatus.CREATED);
-        } catch (Exception e) {
-            logger.error("Error creating new fundraising field with currency: {}", currency, e);
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        } finally {
-            if (newBox == null) {
-                logger.warn("Failed to create fundraising field.");
-            }
-            logger.info("End of attempt to create new fundraising field.");
-        }
+
+        FundraisingBox newBox = boxService.createFundraisingBox(currency);
+        logger.info("Event created successfully. ID: {}, Currency: {}", newBox.getId(), newBox.getCurrency());
+
+        return new ResponseEntity<>(newBox, HttpStatus.CREATED);
     }
 
     @PostMapping("/{fundraisingBoxId}/assign/{eventId}")
     public ResponseEntity<String> assignFundraisingBoxToEvent(
             @PathVariable Long fundraisingBoxId, @PathVariable Long eventId) {
-        try {
-            boxService.assignFundraisingBoxToEvent(fundraisingBoxId, eventId);
-            return new ResponseEntity<>("The gathering point has been assigned to the event.", HttpStatus.OK);
-        } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-        } catch (IllegalStateException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
+        boxService.assignFundraisingBoxToEvent(fundraisingBoxId, eventId);
+        return new ResponseEntity<>("The gathering point has been assigned to the event.", HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> unregisterFundraisingBox(@PathVariable Long id) {
-        try {
-            boxService.unregisterFundraisingBox(id);
-            return new ResponseEntity<>("The collection point has been deregistered.", HttpStatus.OK);
-        } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-        }
+        boxService.unregisterFundraisingBox(id);
+        return new ResponseEntity<>("The collection point has been deregistered.", HttpStatus.OK);
     }
 
 }
