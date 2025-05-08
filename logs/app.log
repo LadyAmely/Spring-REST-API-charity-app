@@ -1423,3 +1423,32 @@ Caused by: org.hibernate.MappingException: A '@JoinColumn' references a column n
 2025-05-08T16:19:22.935+02:00  INFO 23852 --- [donations] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2025-05-08T16:19:22.938+02:00  INFO 23852 --- [donations] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2025-05-08T16:19:22.942+02:00  INFO 23852 --- [donations] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-05-08T19:02:24.282+02:00  INFO 10320 --- [donations] [main] c.d.donations.DonationsApplicationTests  : Starting DonationsApplicationTests using Java 17.0.8 with PID 10320 (started by Amelia in C:\Users\Amelia\Downloads\donations\donations)
+2025-05-08T19:02:24.284+02:00  INFO 10320 --- [donations] [main] c.d.donations.DonationsApplicationTests  : No active profile set, falling back to 1 default profile: "default"
+2025-05-08T19:02:25.510+02:00  INFO 10320 --- [donations] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-08T19:02:25.586+02:00  INFO 10320 --- [donations] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 60 ms. Found 2 JPA repository interfaces.
+2025-05-08T19:02:26.450+02:00  INFO 10320 --- [donations] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-08T19:02:26.596+02:00  INFO 10320 --- [donations] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.13.Final
+2025-05-08T19:02:26.659+02:00  INFO 10320 --- [donations] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-05-08T19:02:27.278+02:00  INFO 10320 --- [donations] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-08T19:02:27.337+02:00  INFO 10320 --- [donations] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-05-08T19:02:27.609+02:00  INFO 10320 --- [donations] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2025-05-08T19:02:27.611+02:00  INFO 10320 --- [donations] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-05-08T19:02:27.647+02:00  WARN 10320 --- [donations] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-05-08T19:02:27.679+02:00  INFO 10320 --- [donations] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-05-08T19:02:28.781+02:00  INFO 10320 --- [donations] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-08T19:02:28.862+02:00  INFO 10320 --- [donations] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-08T19:02:29.775+02:00  WARN 10320 --- [donations] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-08T19:02:31.172+02:00  INFO 10320 --- [donations] [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2025-05-08T19:02:31.240+02:00  INFO 10320 --- [donations] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2025-05-08T19:02:31.387+02:00  INFO 10320 --- [donations] [main] c.d.donations.DonationsApplicationTests  : Started DonationsApplicationTests in 7.554 seconds (process running for 8.685)
+2025-05-08T19:02:32.364+02:00  INFO 10320 --- [donations] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-08T19:02:32.370+02:00  INFO 10320 --- [donations] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-05-08T19:02:32.386+02:00  INFO 10320 --- [donations] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
