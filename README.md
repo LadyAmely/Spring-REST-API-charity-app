@@ -1,3 +1,10 @@
+
+## Getting Started
+
+### Build the Project
+
+Run this in the project root:
+
 ```
 mvn clean package
 
