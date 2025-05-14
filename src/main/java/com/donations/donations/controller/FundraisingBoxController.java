@@ -4,7 +4,6 @@ import com.donations.donations.dto.FundraisingBoxDTO;
 import com.donations.donations.logs.LogService;
 import com.donations.donations.model.FundraisingBox;
 import com.donations.donations.service.fundraisingBox.FundraisingBoxService;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -67,7 +66,7 @@ public class FundraisingBoxController {
                 FundraisingBox box = boxService.addFunds(fundraisingBoxId, amount);
                 return ResponseEntity.ok(box);
             } else {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null); // Zła wartość amount
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
             }
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);

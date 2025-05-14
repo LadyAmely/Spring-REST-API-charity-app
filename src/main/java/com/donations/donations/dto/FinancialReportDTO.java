@@ -4,9 +4,9 @@ import lombok.Getter;
 
 import java.math.BigDecimal;
 
+@Getter
 public class FinancialReportDTO {
 
-    @Getter
     private String eventName;
     private BigDecimal amount;
     private String currency;
