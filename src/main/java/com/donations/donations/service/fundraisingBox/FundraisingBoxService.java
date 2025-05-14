@@ -1,6 +1,5 @@
 package com.donations.donations.service.fundraisingBox;
 
-import com.donations.donations.logs.LogService;
 import com.donations.donations.model.Event;
 import com.donations.donations.model.FundraisingBox;
 import com.donations.donations.repository.EventRepository;
@@ -13,6 +12,10 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.HashSet;
+import java.util.Arrays;
+import java.util.Set;
+
 
 @Service
 public class FundraisingBoxService implements IFundraisingBoxService {
@@ -48,6 +51,7 @@ public class FundraisingBoxService implements IFundraisingBoxService {
     public void unregisterFundraisingBox(Long id) {
         FundraisingBox fundraisingBox = boxRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("The collection point has been deregistered."));
+        fundraisingBox.setAmount(BigDecimal.ZERO);
         fundraisingBox.setDeleted(true);
         boxRepository.save(fundraisingBox);
     }
@@ -60,9 +64,14 @@ public class FundraisingBoxService implements IFundraisingBoxService {
         Event event = eventRepository.findById(eventId)
                 .orElseThrow(() -> new IllegalArgumentException("Fundraising event does not exist."));
 
-        if (fundraisingBox.isAssigned()) {
+        if (fundraisingBox.getEvent() != null) {
             throw new IllegalStateException("The collection point is already assigned to another event.");
         }
+
+        if (!fundraisingBox.isEmpty()) {
+            throw new IllegalStateException("The collection point must be empty before assigning it to an event.");
+        }
+
         fundraisingBox.setEvent(event);
         fundraisingBox.setAssigned(true);
         boxRepository.save(fundraisingBox);
@@ -71,31 +80,29 @@ public class FundraisingBoxService implements IFundraisingBoxService {
     @Override
     public FundraisingBox addFunds(Long boxId, BigDecimal amount) {
         try {
+
+            Set<String> allowedCurrencies = new HashSet<>(Arrays.asList("USD", "EUR", "GBP"));
+
             FundraisingBox fundraisingBox = fundraisingBoxRepository.findById(boxId)
                     .orElseThrow(() -> new EntityNotFoundException("Box not found"));
-
-            // Logowanie przed dodaniem środków
             log.info(String.format("Before adding funds: Box ID = %d, Current Amount = %s", boxId, fundraisingBox.getAmount()));
-
-            // Walidacja kwoty
             if (amount.compareTo(BigDecimal.ZERO) <= 0) {
                 throw new IllegalArgumentException("Amount must be greater than zero");
             }
 
-            // Dodanie środków do skrzynki
-            fundraisingBox.setAmount(fundraisingBox.getAmount().add(amount));
+            if (!allowedCurrencies.contains(fundraisingBox.getCurrency())) {
+                throw new IllegalArgumentException("Currency not supported. Allowed currencies are: USD, EUR, GBP.");
+            }
 
-            // Logowanie po dodaniu środków
+            fundraisingBox.setAmount(fundraisingBox.getAmount().add(amount));
             log.info(String.format("After adding funds: New Amount = %s", fundraisingBox.getAmount()));
 
             return fundraisingBoxRepository.save(fundraisingBox);
         } catch (Exception e) {
-            // Logowanie błędu
             log.error("Error occurred while adding funds: " + e.getMessage());
-            throw e;  // Rzucenie wyjątku ponownie, aby był obsługiwany w kontrolerze
+            throw e;
         }
     }
-
 
 
     @Override
