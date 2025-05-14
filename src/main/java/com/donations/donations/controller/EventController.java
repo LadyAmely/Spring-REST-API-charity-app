@@ -34,7 +34,7 @@ public class EventController {
     @PostMapping
     public ResponseEntity<Event> createEvent(@RequestBody Event event) {
         Event createdEvent = eventService.createEvent(event.getName(), event.getCurrency());
-        logService.logInfo("Event created successfully: " + createdEvent.getName());  // Zamiast logger.info()
+        logService.logInfo("Event created successfully: " + createdEvent.getName());
         return new ResponseEntity<>(createdEvent, HttpStatus.CREATED);
     }
 
